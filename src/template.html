@@ -5,5 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <button class="newTask">+ ADD TASK</button>
+    <div class="taskContainer"></div>
+    <button class="newProject">CREATE NEW PROJECT</button>
+    <div class="projectContainer"></div>
+    <dialog id="newTaskModal">
+      <div class="cancel">X</div>
+      <form>
+        <label for="title"
+          >Title
+          <input type="text" name="" id="title" required />
+        </label>
+        <label for="title"
+          >Description
+          <input type="text" name="" id="description" required />
+        </label>
+        <label for="title"
+          >Date
+          <input type="date" name="" id="date" required />
+        </label>
+        <label for="title">Priority </label>
+        <select name="" id="priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <button type="submit" id="createTask">Create Task</button>
+      </form>
+    </dialog>
+    <dialog id="newProjectModal">
+      <div class="cancelP">X</div>
+      <form>
+        <label for="project-name">Enter Project Name</label>
+        <input type="text" id="project-name" required />
+      </form>
+      <button id="createProject">Create Project</button>
+    </dialog>
+  </body>
 </html>

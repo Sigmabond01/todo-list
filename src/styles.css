@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectContainer {
+  display: flex;
+  flex-direction: column;
+}
