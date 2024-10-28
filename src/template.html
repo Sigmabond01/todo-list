@@ -15,22 +15,24 @@
       <form>
         <label for="title"
           >Title
-          <input type="text" name="" id="title" required />
+          <input type="text" name="" id="title" required autocomplete="off" />
         </label>
-        <label for="title"
+        <label for="description"
           >Description
-          <input type="text" name="" id="description" required />
+          <input type="text" name="" id="description" required autocomplete="off" />
         </label>
-        <label for="title"
+        <label for="date"
           >Date
           <input type="date" name="" id="date" required />
         </label>
-        <label for="title">Priority </label>
+        <label for="priority">Priority </label>
         <select name="" id="priority">
           <option value="high">High</option>
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
+        <label for="project-selector">Select Project</label>
+        <select id="project-selector"></select>
         <button type="submit" id="createTask">Create Task</button>
       </form>
     </dialog>
@@ -38,9 +40,9 @@
       <div class="cancelP">X</div>
       <form>
         <label for="project-name">Enter Project Name</label>
-        <input type="text" id="project-name" required />
+        <input type="text" id="project-name" required autocomplete="off" />
+        <button type="submit" id="createProject">Create Project</button>
       </form>
-      <button id="createProject">Create Project</button>
     </dialog>
   </body>
 </html>

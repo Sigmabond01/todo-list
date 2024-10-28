@@ -1,5 +1,5 @@
 import { TaskObj } from "./task";
-import { displayTask, displayProjects } from "./dom";
+import { displayTask, displayProjects, projectSelectionOption } from "./dom";
 import { Project } from "./projects";
 
 const button = document.querySelector("#createTask");
@@ -10,10 +10,11 @@ button.addEventListener("click", (e) => {
   const description = document.querySelector("#description").value;
   const date = document.querySelector("#date").value;
   const priority = document.querySelector("#priority").value;
+  const project = document.querySelector("#project-selector").value;
   e.preventDefault();
   if (!title || !description || !date) {
     return;
-  } else TaskObj.addTask(title, description, date, priority);
+  } else TaskObj.addTask(title, description, date, priority, project);
   displayTask();
   clearInput();
   newTaskModal.close();
@@ -23,6 +24,7 @@ const newTaskBtn = document.querySelector(".newTask");
 const cancel = document.querySelector(".cancel");
 
 newTaskBtn.addEventListener("click", () => {
+  projectSelectionOption();
   newTaskModal.showModal();
 });
 
@@ -51,6 +53,7 @@ newProject.addEventListener("click", () => {
 
 cancelP.addEventListener("click", () => {
   newProjectModal.close();
+  document.querySelector("#project-name").value = "";
 });
 
 createProjectBtn.addEventListener("click", () => {

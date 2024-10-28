@@ -18,9 +18,8 @@ export const Project = (function () {
     projects.splice(index, 1);
   }
 
-  function addTaskToProject(obj, index = 0) {
+  function addTaskToProject(obj, index) {
     projects[index].todos.push(obj);
-    console.log(projects);
   }
 
   function removeTaskFromProject(index, taskIndex) {
@@ -32,5 +31,3 @@ export const Project = (function () {
   }
   return { createProject, deleteProject, addTaskToProject, removeTaskFromProject, getProject };
 })();
-
-// Project.createProject("IDK");

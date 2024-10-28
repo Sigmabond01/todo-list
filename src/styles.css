@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -11,4 +17,9 @@ form {
 .projectContainer {
   display: flex;
   flex-direction: column;
+}
+
+.delete-task,
+.delete-project {
+  width: max-content;
 }

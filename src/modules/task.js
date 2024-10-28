@@ -1,4 +1,5 @@
 import { Project } from "./projects";
+import { displayTask } from "./dom";
 
 class Todo {
   constructor(title, description, dueDate, priority) {
@@ -10,22 +11,29 @@ class Todo {
 }
 
 export const TaskObj = (function () {
-  function addTask(title, description, dueDate, priority) {
-    // const task = new Todo("Breakfast", "Eat Breakfast", new Date(2024, 9, 16), "High");
-    // const a = new Todo("IDK", "Do IDK", new Date(2024, 9, 16), "Medium");
-    // const b = new Todo("HW", "Do HW", new Date(2024, 9, 16), "Low");
-    // Project.addTaskToProject(task, 0);
+  function addTask(title, description, dueDate, priority, project) {
+    const projectIndex = findProjectIndex(project);
     const task = new Todo(title, description, dueDate, priority);
-    Project.addTaskToProject(task, 0);
-    // Project.addTaskToProject(a, 0);
-    // Project.addTaskToProject(b, 1);
+    Project.addTaskToProject(task, projectIndex);
   }
 
   function deleteTask(index, taskIndex) {
     Project.removeTaskFromProject(index, taskIndex);
+    displayTask();
   }
 
   return { addTask, deleteTask };
 })();
 
-// TaskObj.addTask();
+function findProjectIndex(project) {
+  const arr = Project.getProject();
+  if (project === "--none--") {
+    return 0;
+  } else {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].title === project) {
+        return i;
+      }
+    }
+  }
+}
