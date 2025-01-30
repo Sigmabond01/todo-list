@@ -10,6 +10,8 @@ export default function initializeApp() {
   const completedProjectsArr = loadFromLocalStorage("compProjArray");
   CompletedProjects.setCompArr(completedProjectsArr);
 
+  document.querySelector(".page-text").textContent = "All";
+
   displayProjects();
   displayTask();
 }

@@ -29,7 +29,7 @@ newTaskModalForm.addEventListener("submit", (e) => {
     const project = document.querySelector("#project-selector").value;
     const projectIndex = findProjectIndex(project);
     TaskObj.addTask(title, description, date, priority, project);
-    displayTask([Project.getProject()[projectIndex]]);
+    displayTask([Project.getProject()[projectIndex]], "pr");
   } else if (model === "edit") {
     TaskObj.replaceTask(title, description, date, priority, T);
     model = "create";
@@ -149,18 +149,24 @@ document.querySelector(".error__close").addEventListener("click", () => {
   }, 2000);
 });
 
+const pageText = document.querySelector(".page-text");
+
 document.querySelector(".all-tasks").addEventListener("click", () => {
+  pageText.textContent = "All";
   displayTask();
 });
 
 document.querySelector(".today-task").addEventListener("click", () => {
+  pageText.textContent = "Today";
   displayTask(Project.getProject(), null, "today");
 });
 
 document.querySelector(".scheduled-task").addEventListener("click", () => {
+  pageText.textContent = "Scheduled";
   displayTask(Project.getProject(), null, "scheduled");
 });
 
 document.querySelector(".completed-task").addEventListener("click", () => {
+  pageText.textContent = "Completed";
   displayTask(CompletedProjects.getCompArr(), "comp");
 });

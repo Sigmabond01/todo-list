@@ -11,7 +11,6 @@ const taskContainer = document.querySelector(".taskContainer");
 
 export function displayTask(arr = Project.getProject(), inst, filter = "all") {
   clearChild(taskContainer);
-  let hasTasks = false;
 
   if (inst === "comp") {
     const removeAllBtn = document.createElement("button");
@@ -43,10 +42,9 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
     }
 
     if (filteredTodos.length > 0) {
-      hasTasks = true;
-
       const prName = document.createElement("div");
-      prName.textContent = arr[i].title;
+      if (inst === "pr") {
+      } else prName.textContent = arr[i].title;
       taskContainer.appendChild(prName);
 
       filteredTodos.forEach((todo, j) => {
@@ -139,15 +137,6 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
       });
     }
   }
-
-  if (!hasTasks && !inst) {
-    const emptTxt = document.createElement("div");
-    emptTxt.classList.add("empty-text");
-    if (filter === "today") emptTxt.textContent = "No Tasks scheduled for Today!";
-    else if (filter === "scheduled") emptTxt.textContent = "No Scheduled Tasks";
-    else emptTxt.textContent = "Add a Task";
-    taskContainer.appendChild(emptTxt);
-  }
 }
 
 const projectContainer = document.querySelector(".projectContainer");
@@ -165,7 +154,8 @@ export function displayProjects() {
     project.classList.add("projectName");
     project.textContent = Project.getProject()[i].title;
     project.addEventListener("click", () => {
-      displayTask([Project.getProject()[i]]);
+      document.querySelector(".page-text").textContent = project.textContent;
+      displayTask([Project.getProject()[i]], "pr");
     });
 
     moreBtn.src = moreIcon;
