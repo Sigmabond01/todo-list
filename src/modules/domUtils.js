@@ -153,7 +153,7 @@ export function displayProjects() {
     projectItem.classList.add("project-item");
     project.classList.add("projectName");
     project.textContent = Project.getProject()[i].title;
-    project.addEventListener("click", () => {
+    projectItem.addEventListener("click", () => {
       document.querySelector(".page-text").textContent = project.textContent;
       displayTask([Project.getProject()[i]], "pr");
     });
