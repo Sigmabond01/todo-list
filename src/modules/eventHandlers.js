@@ -30,6 +30,7 @@ newTaskModalForm.addEventListener("submit", (e) => {
     const projectIndex = findProjectIndex(project);
     TaskObj.addTask(title, description, date, priority, project);
     displayTask([Project.getProject()[projectIndex]], "pr");
+    document.querySelector(".page-text").textContent = Project.getProject()[projectIndex].title;
   } else if (model === "edit") {
     TaskObj.replaceTask(title, description, date, priority, T);
     model = "create";
@@ -118,7 +119,8 @@ createProjectForm.addEventListener("submit", (e) => {
     Project.createProject(projectVal);
     displayProjects();
     const projectIndex = findProjectIndex(projectVal);
-    displayTask([Project.getProject()[projectIndex]]);
+    displayTask([Project.getProject()[projectIndex]], "pr");
+    document.querySelector(".page-text").textContent = Project.getProject()[projectIndex].title;
   } else if (pModel === "edit") {
     Project.renameProject(projectVal, i);
     displayProjects();

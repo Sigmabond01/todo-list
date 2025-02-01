@@ -23,6 +23,10 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
     taskContainer.appendChild(removeAllBtn);
   }
 
+  if (filter === "all" && inst !== "comp" && inst !== "pr") {
+    document.querySelector(".page-text").textContent = "All";
+  }
+
   const today = new Date();
 
   for (let i = 0; i < arr.length; i++) {
@@ -42,10 +46,13 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
     }
 
     if (filteredTodos.length > 0) {
-      const prName = document.createElement("div");
       if (inst === "pr") {
-      } else prName.textContent = arr[i].title;
-      taskContainer.appendChild(prName);
+      } else {
+        const prName = document.createElement("div");
+        prName.classList.add("pr-name");
+        prName.textContent = arr[i].title;
+        taskContainer.appendChild(prName);
+      }
 
       filteredTodos.forEach((todo, j) => {
         const task = document.createElement("div");
@@ -60,7 +67,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         check.addEventListener("change", () => {
           if (check.checked) {
             CompletedProjects.addTask(check);
-            displayTask(arr, null, filter);
+            displayTask(arr, inst, filter);
           } else {
             CompletedProjects.undoCompletion(todo, arr[i].title);
             CompletedProjects.deleteCTask(i, j);
@@ -106,7 +113,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
             displayTask(arr, "comp");
           } else {
             TaskObj.deleteTask(findProjectIndex(arr[i].title), findTaskIndex(todo.title));
-            displayTask(arr, null, filter);
+            displayTask(arr, inst, filter);
           }
         });
 
