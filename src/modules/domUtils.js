@@ -89,10 +89,6 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         dueDate.classList.add("task-dueDate");
         dueDate.textContent = todo.dueDate;
 
-        const priority = document.createElement("div");
-        priority.classList.add("task-priority");
-        priority.textContent = todo.priority;
-
         const edit = document.createElement("img");
         edit.classList.add("edit-task");
         edit.src = editIcon;
@@ -117,14 +113,19 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
           }
         });
 
+        if (todo.priority === "high") {
+          task.classList.add("high-priority");
+        } else if (todo.priority === "medium") {
+          task.classList.add("medium-priority");
+        } else {
+          task.classList.add("low-priority");
+        }
+
         const taskMainSec = document.createElement("div");
         taskMainSec.classList.add("task-main-section");
 
         const taskMainSecContent = document.createElement("div");
         taskMainSecContent.classList.add("task-main-section-content");
-
-        const taskMainSecBtm = document.createElement("div");
-        taskMainSecBtm.classList.add("task-main-section-bottom");
 
         const taskBtnSec = document.createElement("div");
         taskBtnSec.classList.add("task-btn-section");
@@ -133,9 +134,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         taskMainSecContent.appendChild(title);
         taskMainSecContent.appendChild(description);
         taskMainSec.appendChild(taskMainSecContent);
-        taskMainSecBtm.appendChild(dueDate);
-        taskMainSecBtm.appendChild(priority);
-        taskMainSec.appendChild(taskMainSecBtm);
+        taskMainSec.appendChild(dueDate);
         task.appendChild(taskMainSec);
         taskBtnSec.appendChild(edit);
         taskBtnSec.appendChild(deleteBtn);

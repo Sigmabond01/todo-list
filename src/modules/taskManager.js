@@ -40,13 +40,15 @@ export function findTaskIndex(title) {
   }
 }
 
-export function checkTaskTitle(title) {
+export function checkTaskTitle(title, currentTitle = null) {
   const arr = Project.getProject();
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].todos.length; j++) {
-      if (arr[i].todos[j].title === title) {
+      const task = arr[i].todos[j];
+      if (task.title === title && task.title !== currentTitle) {
         return true;
       }
     }
   }
+  return false;
 }

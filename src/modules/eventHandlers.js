@@ -1,4 +1,4 @@
-import { TaskObj, checkTaskTitle } from "./taskManager";
+import { TaskObj, checkTaskTitle, findTaskIndex } from "./taskManager";
 import { displayTask, displayProjects, projectSelectionOption } from "./domUtils";
 import { Project, findProjectIndex, checkProjectTitle } from "./projectManager";
 import { CompletedProjects } from "./completedTasks";
@@ -13,7 +13,8 @@ newTaskModalForm.addEventListener("submit", (e) => {
 
   const titleField = document.querySelector("#title");
   const title = titleField.value.trim();
-  if (checkTaskTitle(title)) {
+  const currentTitle = model === "edit" ? T : null;
+  if (checkTaskTitle(title, currentTitle)) {
     titleField.setCustomValidity("Title already exists");
     titleField.reportValidity();
     return;
@@ -139,7 +140,8 @@ export function editTask(editEle) {
   document.querySelector("#title").value = T;
   document.querySelector("#description").value = task.querySelector(".task-desc").textContent;
   document.querySelector("#date").value = task.querySelector(".task-dueDate").textContent;
-  document.querySelector("#priority").value = task.querySelector(".task-priority").textContent;
+  const [a, b] = findTaskIndex(T);
+  document.querySelector("#priority").value = Project.getProject()[a].todos[b].priority;
 }
 
 document.querySelector(".error__close").addEventListener("click", () => {
