@@ -108,7 +108,8 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
             CompletedProjects.deleteCTask(i, j);
             displayTask(arr, "comp");
           } else {
-            TaskObj.deleteTask(findProjectIndex(arr[i].title), findTaskIndex(todo.title));
+            const [a, b] = findTaskIndex(todo.title);
+            TaskObj.deleteTask(a, b);
             displayTask(arr, inst, filter);
           }
         });
