@@ -1,4 +1,4 @@
-import { Project, findProjectIndex } from "./projectManager";
+import { Project } from "./projectManager";
 import { TaskObj, findTaskIndex } from "./taskManager";
 import { CompletedProjects } from "./completedTasks";
 import { editTask, showProjectForm } from "./eventHandlers";
@@ -25,6 +25,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
 
   if (filter === "all" && inst !== "comp" && inst !== "pr") {
     document.querySelector(".page-text").textContent = "All";
+    currentPageMark(document.querySelector(".all-tasks"));
   }
 
   const today = new Date();
@@ -44,7 +45,16 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         return compareAsc(dateA, dateB);
       });
     }
-
+    if (inst === "pr") {
+      const prName = arr[i].title;
+      const projectItems = document.querySelectorAll(".project-item");
+      for (let item of projectItems) {
+        const nameElement = item.querySelector(".projectName");
+        if (nameElement && nameElement.textContent.trim() === prName) {
+          currentPageMark(item);
+        }
+      }
+    }
     if (filteredTodos.length > 0) {
       if (inst === "pr") {
       } else {
@@ -160,9 +170,10 @@ export function displayProjects() {
     projectItem.classList.add("project-item");
     project.classList.add("projectName");
     project.textContent = Project.getProject()[i].title;
-    projectItem.addEventListener("click", () => {
+    projectItem.addEventListener("click", function () {
       document.querySelector(".page-text").textContent = project.textContent;
       displayTask([Project.getProject()[i]], "pr");
+      currentPageMark(this);
     });
 
     moreBtn.src = moreIcon;
@@ -252,4 +263,9 @@ function createMenu() {
     document.body.appendChild(menu);
   }
   return menu;
+}
+
+export function currentPageMark(page) {
+  document.querySelector(".currentPageMark")?.classList.remove("currentPageMark");
+  if (page instanceof Element) page.classList.add("currentPageMark");
 }

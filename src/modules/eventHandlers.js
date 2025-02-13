@@ -1,5 +1,5 @@
 import { TaskObj, checkTaskTitle, findTaskIndex } from "./taskManager";
-import { displayTask, displayProjects, projectSelectionOption } from "./domUtils";
+import { displayTask, displayProjects, projectSelectionOption, currentPageMark } from "./domUtils";
 import { Project, findProjectIndex, checkProjectTitle } from "./projectManager";
 import { CompletedProjects } from "./completedTasks";
 
@@ -126,6 +126,7 @@ createProjectForm.addEventListener("submit", (e) => {
     Project.renameProject(projectVal, i);
     displayProjects();
     displayTask();
+
     pModel = "create";
   }
   projectField.value = "";
@@ -155,22 +156,25 @@ document.querySelector(".error__close").addEventListener("click", () => {
 
 const pageText = document.querySelector(".page-text");
 
-document.querySelector(".all-tasks").addEventListener("click", () => {
+document.querySelector(".all-tasks").addEventListener("click", function () {
   pageText.textContent = "All";
   displayTask();
 });
 
-document.querySelector(".today-task").addEventListener("click", () => {
+document.querySelector(".today-task").addEventListener("click", function () {
   pageText.textContent = "Today";
   displayTask(Project.getProject(), null, "today");
+  currentPageMark(this);
 });
 
-document.querySelector(".scheduled-task").addEventListener("click", () => {
+document.querySelector(".scheduled-task").addEventListener("click", function () {
   pageText.textContent = "Scheduled";
   displayTask(Project.getProject(), null, "scheduled");
+  currentPageMark(this);
 });
 
-document.querySelector(".completed-task").addEventListener("click", () => {
+document.querySelector(".completed-task").addEventListener("click", function () {
   pageText.textContent = "Completed";
   displayTask(CompletedProjects.getCompArr(), "comp");
+  currentPageMark(this);
 });
