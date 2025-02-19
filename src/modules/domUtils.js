@@ -93,7 +93,6 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         const description = document.createElement("div");
         description.classList.add("task-desc");
         description.textContent = todo.description;
-        description.title = description.textContent;
 
         const dueDate = document.createElement("div");
         dueDate.classList.add("task-dueDate");
