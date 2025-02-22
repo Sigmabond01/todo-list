@@ -68,20 +68,43 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         const task = document.createElement("div");
         task.classList.add("task");
 
+        const checkContainer = document.createElement("label");
         const check = document.createElement("input");
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 64 64");
+        svg.setAttribute("height", "1em");
+        svg.setAttribute("width", "1em");
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute(
+          "d",
+          "M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+        );
+        path.setAttribute("pathLength", "575.0541381835938");
+        path.classList.add("path");
+        checkContainer.classList.add("checkContainer");
         check.type = "checkbox";
         check.id = "checked";
         if (inst === "comp") {
           check.checked = true;
+          task.classList.add("completed");
         }
         check.addEventListener("change", () => {
           if (check.checked) {
-            CompletedProjects.addTask(check);
-            displayTask(arr, inst, filter);
+            check.disabled = true;
+            setTimeout(() => {
+              CompletedProjects.addTask(check);
+              check.disabled = false;
+              displayTask(arr, inst, filter);
+            }, 600);
           } else {
-            CompletedProjects.undoCompletion(todo, arr[i].title);
-            CompletedProjects.deleteCTask(i, j);
-            displayTask(arr, "comp");
+            check.disabled = true;
+            setTimeout(() => {
+              check.disabled = false;
+              CompletedProjects.undoCompletion(todo, arr[i].title);
+              CompletedProjects.deleteCTask(i, j);
+              displayTask(arr, "comp");
+            }, 600);
           }
         });
 
@@ -140,7 +163,10 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         const taskBtnSec = document.createElement("div");
         taskBtnSec.classList.add("task-btn-section");
 
-        task.appendChild(check);
+        svg.appendChild(path);
+        checkContainer.appendChild(check);
+        checkContainer.appendChild(svg);
+        task.appendChild(checkContainer);
         taskMainSecContent.appendChild(title);
         taskMainSecContent.appendChild(description);
         taskMainSec.appendChild(taskMainSecContent);
