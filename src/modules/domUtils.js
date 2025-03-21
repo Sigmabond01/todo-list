@@ -88,10 +88,12 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         if (inst === "comp") {
           check.checked = true;
           task.classList.add("completed");
+          task.classList.add("line-through");
         }
         check.addEventListener("change", () => {
           if (check.checked) {
             check.disabled = true;
+            task.classList.add("line-through");
             setTimeout(() => {
               CompletedProjects.addTask(check);
               check.disabled = false;
@@ -99,6 +101,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
             }, 600);
           } else {
             check.disabled = true;
+            task.classList.remove("line-through");
             setTimeout(() => {
               check.disabled = false;
               CompletedProjects.undoCompletion(todo, arr[i].title);
