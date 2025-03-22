@@ -123,6 +123,10 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
         const dueDate = document.createElement("div");
         dueDate.classList.add("task-dueDate");
         dueDate.textContent = todo.dueDate;
+        const dueDateStr = new Date(dueDate.textContent.trim());
+        if (dueDateStr < today) {
+          dueDate.classList.add("line-through");
+        }
 
         const edit = document.createElement("img");
         edit.classList.add("edit-task");
