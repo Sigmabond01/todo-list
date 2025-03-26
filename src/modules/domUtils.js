@@ -217,12 +217,12 @@ export function displayProjects() {
       menu.style.left = `${rect.left + rect.width}px`;
       menu.classList.remove("hidden");
 
-      const editBtn = menu.querySelector("button:nth-child(1)");
+      const editBtn = menu.querySelector("div:nth-child(1)");
       editBtn.addEventListener("click", () => {
         showProjectForm("edit", project.textContent);
       });
 
-      const deleteBtn = menu.querySelector("button:nth-child(2)");
+      const deleteBtn = menu.querySelector("div:nth-child(2)");
       deleteBtn.addEventListener("click", () => {
         Project.deleteProject(i);
         displayProjects();
@@ -268,8 +268,8 @@ function createMenu() {
   let menu = document.querySelector(".moreMenu");
   if (!menu) {
     menu = document.createElement("div");
-    const editBtn = document.createElement("button");
-    const deleteBtn = document.createElement("button");
+    const editBtn = document.createElement("div");
+    const deleteBtn = document.createElement("div");
     const editImg = document.createElement("img");
     const deleteImg = document.createElement("img");
     const editText = document.createElement("span");
@@ -277,6 +277,8 @@ function createMenu() {
 
     menu.classList.add("moreMenu");
     menu.classList.add("hidden");
+    editBtn.classList.add("menuRow");
+    deleteBtn.classList.add("menuRow");
     editImg.classList.add("edit-project");
     deleteImg.classList.add("delete-project");
 
