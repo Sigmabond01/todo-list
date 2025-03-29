@@ -12,6 +12,7 @@ const taskContainer = document.querySelector(".taskContainer");
 export function displayTask(arr = Project.getProject(), inst, filter = "all") {
   clearChild(taskContainer);
 
+  document.querySelector(".page-text").style.marginBottom = "0.5em";
   if (inst === "comp") {
     const removeAllBtn = document.createElement("button");
     removeAllBtn.classList.add("remove-all");
@@ -20,6 +21,7 @@ export function displayTask(arr = Project.getProject(), inst, filter = "all") {
       CompletedProjects.clearTasks();
       displayTask(CompletedProjects.getCompArr(), "comp");
     });
+    document.querySelector(".page-text").style.marginBottom = "0px";
     taskContainer.appendChild(removeAllBtn);
   }
 
