@@ -55,6 +55,7 @@ newTaskBtn.addEventListener("click", () => {
   const today = new Date().toISOString().split("T")[0];
   document.querySelector("#date").setAttribute("min", today);
   newTaskModal.showModal();
+  document.querySelector("#createTask").textContent = "Create Task";
 });
 
 cancel.addEventListener("click", (e) => {
@@ -143,6 +144,7 @@ export function editTask(editEle) {
   document.querySelector("#date").value = task.querySelector(".task-dueDate").textContent;
   const [a, b] = findTaskIndex(T);
   document.querySelector("#priority").value = Project.getProject()[a].todos[b].priority;
+  document.querySelector("#createTask").textContent = "Confirm";
 }
 
 document.querySelector(".error__close").addEventListener("click", () => {
